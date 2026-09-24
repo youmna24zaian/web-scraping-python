@@ -2,7 +2,6 @@
 
 A practical collection of Python web-scraping examples using **Requests**, **BeautifulSoup**, **Pandas**, **lxml**, and **OpenPyXL**. The project turns public web pages into structured datasets through three focused examples: books, inspirational quotes, and football match results.
 
-![Books Web Scraper](images/books-scraper.png)
 
 ## Project Overview
 
