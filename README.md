@@ -7,7 +7,7 @@ A practical collection of Python web-scraping examples using **Requests**, **Bea
 
 This project demonstrates how to request web pages, parse their HTML, extract selected information, print the results, and save football match data to an Excel file. The examples cover books, inspirational quotes, and football match results.
 
-The three scripts preserve the original notebook workflow and field names. They are intentionally simple so the scraping steps remain clear for beginners.
+The three scripts are intentionally kept simple and focused on demonstrating the core steps of a basic web-scraping workflow.
 
 ## Technologies Used
 
@@ -36,7 +36,7 @@ web-scraping-python/
 └── README.md
 ```
 
-The YallaKora script creates `matches1.xlsx` in the project directory after it runs.
+The YallaKora script generates matches1.xlsx in the project directory when it runs.
 
 ## 1. Books to Scrape
 
@@ -107,7 +107,15 @@ On some systems, use `python3` and `pip3` instead of `python` and `pip`.
 
 ## Learning Objectives
 
-This project helps learners practice sending HTTP requests, parsing HTML with BeautifulSoup, selecting page elements, extracting text and attributes, storing records in Python lists and dictionaries, creating a Pandas DataFrame, and exporting tabular data to Excel.
+This project provides hands-on practice with:
+
+* Sending HTTP requests and retrieving web pages.
+* Parsing HTML using BeautifulSoup and lxml.
+* Selecting page elements and extracting text and attributes.
+* Organizing extracted data using Python lists and dictionaries.
+* Creating structured datasets with Pandas DataFrames.
+* Exporting tabular data to Excel.
+* Understanding the basic workflow of collecting and preparing web data for further analysis.
 
 ## Disclaimer
 
@@ -115,11 +123,11 @@ This repository is intended for educational purposes. Before scraping any websit
 
 ## Author
 
-**Youmna Zaian** · [GitHub](https://github.com/youmna24zaian)
+**Youmna Zaian** ·
 
 ## Learning Context
 
 This project was developed as a practical application of concepts covered during my Data Science training.
 
-It focuses on applying Python and web scraping techniques through hands-on implementation and working with real-world web data.
+It focuses on applying Python and web scraping techniques through hands-on implementation, including collecting, parsing, and organizing data from web pages.
 
