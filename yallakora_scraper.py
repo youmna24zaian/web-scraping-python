@@ -1,71 +1,55 @@
-"""Scrape finished football matches from YallaKora by date."""
-
-from datetime import datetime
-from pathlib import Path
-
-import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-
-BASE_URL = "https://www.yallakora.com/match-center"
-OUTPUT_PATH = Path(__file__).resolve().parent / "output" / "matches.xlsx"
-HEADERS = {"User-Agent": "web-scraping-python/1.0"}
+import pandas as pd
 
 
-def normalize_date(date_text: str) -> str:
-    """Validate a date and return it in the format expected by YallaKora."""
-    parsed_date = datetime.strptime(date_text.strip(), "%m/%d/%Y")
-    return parsed_date.strftime("%m/%d/%Y")
+def main():
+  date = input("Please enter the date of matches you want to scrap in the format MM/DD/YYYY")
 
+  url = f"https://www.yallakora.com/match-center?date={date}"
 
-def scrape_matches(date_text: str) -> list[dict[str, str]]:
-    """Return finished matches grouped by championship for a selected date."""
-    date = normalize_date(date_text)
-    response = requests.get(
-        BASE_URL,
-        params={"date": date},
-        headers=HEADERS,
-        timeout=30,
-    )
-    response.raise_for_status()
-    soup = BeautifulSoup(response.text, "lxml")
+  page = requests.get(url)
 
-    matches = []
-    for championship in soup.select("div.matchCard"):
-        championship_title = championship.select_one("h2")
-        if championship_title is None:
-            continue
+  soup = BeautifulSoup(page.content, "lxml")
 
-        for match in championship.select("div.item.finish.liItem"):
-            team_a = match.select_one("div.teams.teamA p")
-            team_b = match.select_one("div.teams.teamB p")
-            result = match.select_one("div.MResult")
-            scores = result.select("span.score") if result else []
-            time = result.select_one("span.time") if result else None
+  championships = soup.find_all("div", {"class" : "matchCard"})
 
-            if not team_a or not team_b or len(scores) < 2:
-                continue
+  all_matches_list = []
 
-            matches.append(
-                {
-                    "championship_name": championship_title.get_text(strip=True),
-                    "team_a": team_a.get_text(strip=True),
-                    "team_b": team_b.get_text(strip=True),
-                    "score": f"{scores[0].get_text(strip=True)} - {scores[1].get_text(strip=True)}",
-                    "time": time.get_text(strip=True) if time else "",
-                }
-            )
-    return matches
+  for championship in championships:
 
+    championship_name = championship.find("h2").text.strip()
 
-def main() -> None:
-    date_text = input("Enter the match date (MM/DD/YYYY): ")
-    matches = pd.DataFrame(scrape_matches(date_text))
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    matches.to_excel(OUTPUT_PATH, index=False)
-    print(matches.to_string(index=False))
-    print(f"\nSaved {len(matches)} matches to {OUTPUT_PATH}")
+    all_finished_match = championship.find_all("div", {"class" : "item finish liItem"})
 
+    for match in all_finished_match:
 
-if __name__ == "__main__":
-    main()
+      team_A = match.find("div", {"class" : "teams teamA"}).find("p").text.strip()
+      team_B = match.find("div", {"class" : "teams teamB"}).find("p").text.strip()
+
+      match_result = match.find("div", {"class" : "MResult"})
+
+      # score_a = match_result.find("span", {"class" : "score"}).text.strip()
+      # score_b = match_result.find_all("span", {"class" : "score"})[1].text.strip()
+
+      scores = match_result.find_all("span", {"class" : "score"})
+
+      score_a = scores[0].text.strip()
+
+      score_b = scores[1].text.strip()
+
+      match_time = match_result.find("span", {"class" : "time"}).text.strip()
+
+      all_matches_list.append({"Championship Name" : championship_name
+                               ,"Team A" : team_A
+                               , "Team B" : team_B
+                               , "Score" : f"{score_a} - {score_b}"
+                               , "Time" : match_time})
+
+    return all_matches_list
+
+all_matches_df = pd.DataFrame(main())
+
+print(all_matches_df)
+
+all_matches_df.to_excel("matches1.xlsx",index=False)

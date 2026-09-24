@@ -1,22 +1,22 @@
 # Web Scraping with Python
 
-A practical collection of Python web-scraping examples using **Requests**, **BeautifulSoup**, **Pandas**, **lxml**, and **OpenPyXL**. The project turns public web pages into structured datasets through three focused examples: books, inspirational quotes, and football match results.
+A practical collection of Python web-scraping examples using **Requests**, **BeautifulSoup**, **Pandas**, **lxml**, and **OpenPyXL**. The project separates the original notebook code into three standalone scripts without changing the scraping logic.
 
 
 ## Project Overview
 
-This project demonstrates a beginner-friendly scraping workflow from request to export. Each script sends an HTTP request to a public practice website, parses the returned HTML, extracts selected fields, stores the results in a Pandas DataFrame, and saves the data locally.
+This project demonstrates how to request web pages, parse their HTML, extract selected information, print the results, and save football match data to an Excel file. The examples cover books, inspirational quotes, and football match results.
 
-The examples intentionally use educational scraping websites and a public sports website. They show how the same core process can be adapted to different page structures, including product cards, quote blocks, and nested match cards.
+The three scripts preserve the original notebook workflow and field names. They are intentionally simple so the scraping steps remain clear for beginners.
 
 ## Technologies Used
 
-- **Python** for scripting and automation.
-- **Requests** for downloading HTML pages.
-- **BeautifulSoup** for parsing and extracting information from HTML.
-- **Pandas** for tabular data handling and CSV export.
-- **lxml** as the HTML parser used by the YallaKora scraper.
-- **OpenPyXL** for writing match results to an Excel workbook.
+- **Python** for scripting.
+- **Requests** for downloading web pages.
+- **BeautifulSoup** for parsing HTML.
+- **Pandas** for creating a DataFrame from match results.
+- **lxml** as the parser used for the YallaKora page.
+- **OpenPyXL** through Pandas for Excel export.
 
 ## Project Structure
 
@@ -27,11 +27,6 @@ web-scraping-python/
 ├── quotes_scraper.py
 ├── yallakora_scraper.py
 │
-├── output/
-│   ├── books.csv
-│   ├── quotes.csv
-│   └── matches.xlsx
-│
 ├── images/
 │   ├── books-scraper.png
 │   ├── quotes-scraper.png
@@ -41,13 +36,13 @@ web-scraping-python/
 └── README.md
 ```
 
-The `output/` files are generated when the scripts run. They are not required before the first execution.
+The YallaKora script creates `matches1.xlsx` in the project directory after it runs.
 
 ## 1. Books to Scrape
 
 ![Books Web Scraper](images/books-scraper.png)
 
-`books_scraper.py` collects the first page of the [Books to Scrape](https://books.toscrape.com/) practice website. For each book, it extracts the title, price, and availability status, then saves the results to `output/books.csv`.
+The `books_scraper.py` script requests the first page of [Books to Scrape](https://books.toscrape.com/). It finds each `product_pod` article and prints the book name, price, and availability.
 
 Run it with:
 
@@ -59,7 +54,7 @@ python books_scraper.py
 
 ![Quotes Web Scraper](images/quotes-scraper.png)
 
-`quotes_scraper.py` extracts quote text, author names, and keyword tags from the first page of the [Quotes to Scrape](https://quotes.toscrape.com/) practice website. The structured data is saved to `output/quotes.csv`.
+The `quotes_scraper.py` script requests the first page of [Quotes to Scrape](https://quotes.toscrape.com/). It collects the quote text, author, and tags into a list of dictionaries, then prints that list.
 
 Run it with:
 
@@ -71,7 +66,7 @@ python quotes_scraper.py
 
 ![YallaKora Match Scraper](images/yallakora-scraper.png)
 
-`yallakora_scraper.py` accepts a match date in `MM/DD/YYYY` format and requests the corresponding [YallaKora match-center](https://www.yallakora.com/match-center) page. It extracts championship names, team names, final scores, and match times for finished matches, then saves the results to `output/matches.xlsx`.
+The `yallakora_scraper.py` script asks the user for a match date and requests the corresponding [YallaKora match-center](https://www.yallakora.com/match-center) page. It extracts championship names, finished matches, team names, match results, scores, and match times. The results are converted into a Pandas DataFrame, printed, and saved as `matches1.xlsx`.
 
 Run it with:
 
@@ -79,7 +74,7 @@ Run it with:
 python yallakora_scraper.py
 ```
 
-When prompted, enter a date such as:
+When prompted, enter the date in the format expected by the original script, such as:
 
 ```text
 01/15/2026
@@ -87,38 +82,20 @@ When prompted, enter a date such as:
 
 ## How to Run
 
-1. Clone the repository and move into the project directory:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/youmna24zaian/web-scraping-python.git
    cd web-scraping-python
    ```
 
-2. Create and activate a virtual environment if desired:
-
-   ```bash
-   python -m venv .venv
-   ```
-
-   On macOS and Linux:
-
-   ```bash
-   source .venv/bin/activate
-   ```
-
-   On Windows PowerShell:
-
-   ```powershell
-   .venv\Scripts\Activate.ps1
-   ```
-
-3. Install the dependencies:
+2. Install the required packages:
 
    ```bash
    python -m pip install -r requirements.txt
    ```
 
-4. Run any scraper from the project root:
+3. Run any of the three scripts:
 
    ```bash
    python books_scraper.py
@@ -126,18 +103,11 @@ When prompted, enter a date such as:
    python yallakora_scraper.py
    ```
 
+On some systems, use `python3` and `pip3` instead of `python` and `pip`.
+
 ## Learning Objectives
 
-This project is designed to help learners practice how to:
-
-- Send HTTP requests and handle responses.
-- Parse HTML with CSS selectors and BeautifulSoup.
-- Identify useful page elements and extract clean text.
-- Transform scraped records into structured Python dictionaries.
-- Create Pandas DataFrames from scraped data.
-- Export tabular results to CSV and Excel formats.
-- Work with different HTML layouts and nested page components.
-- Add basic validation, request timeouts, and error handling to a scraper.
+This project helps learners practice sending HTTP requests, parsing HTML with BeautifulSoup, selecting page elements, extracting text and attributes, storing records in Python lists and dictionaries, creating a Pandas DataFrame, and exporting tabular data to Excel.
 
 ## Disclaimer
 
