@@ -1,5 +1,9 @@
 # Web Scraping with Python
 
+![Web Scraping with Python project cover](images/project-cover.png)
+
+This repository demonstrates a practical workflow for turning web pages into structured, reusable data with Python.
+
 A practical collection of Python web-scraping examples using **Requests**, **BeautifulSoup**, **Pandas**, **lxml**, and **OpenPyXL**. The project separates the original notebook code into three standalone scripts without changing the scraping logic.
 
 
@@ -28,6 +32,7 @@ web-scraping-python/
 ├── yallakora_scraper.py
 │
 ├── images/
+│   ├── project-cover.png
 │   ├── books-scraper.png
 │   ├── quotes-scraper.png
 │   └── yallakora-scraper.png
@@ -130,4 +135,3 @@ This repository is intended for educational purposes. Before scraping any websit
 This project was developed as a practical application of concepts covered during my Data Science training.
 
 It focuses on applying Python and web scraping techniques through hands-on implementation, including collecting, parsing, and organizing data from web pages.
-
