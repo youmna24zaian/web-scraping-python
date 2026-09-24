@@ -117,8 +117,9 @@ This repository is intended for educational purposes. Before scraping any websit
 
 **Youmna Zaian** · [GitHub](https://github.com/youmna24zaian)
 
-## References
+## Learning Context
 
-[1]: https://books.toscrape.com/ "Books to Scrape practice website"
-[2]: https://quotes.toscrape.com/ "Quotes to Scrape practice website"
-[3]: https://www.yallakora.com/match-center "YallaKora match center"
+This project was developed as a practical application of concepts covered during my Data Science training.
+
+It focuses on applying Python and web scraping techniques through hands-on implementation and working with real-world web data.
+
