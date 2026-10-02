@@ -1,6 +1,6 @@
 # Web Scraping with Python
 
-![Web Scraping with Python project cover](images/project-cover.png)
+![Web Scraping with Python project cover](images/web_scraping_cover_variant_a.png)
 
 This repository demonstrates a practical workflow for turning web pages into structured, reusable data with Python.
 
